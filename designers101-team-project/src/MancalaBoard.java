@@ -14,4 +14,13 @@ public class MancalaBoard {
 		System.out.println("|      |   4  |   4  |   4  |   4  |   4  |   4  |      |");
 		System.out.println("---------------------------------------------------------");
 	}
+	
+	/**
+	 * Sets the game board up according to the given style.
+	 * @param someStyle a Board Style to give the game board
+	 */
+	public void setStyle(BoardStyle someStyle)
+	{
+		BoardStyle styleToUse = someStyle;
+	}
 }
