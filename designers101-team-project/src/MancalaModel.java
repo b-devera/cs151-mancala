@@ -7,8 +7,12 @@ public class MancalaModel {
 	int[] pits;
 	ArrayList<ChangeListener> listeners;
 	
-	public MancalaModel(int[] p) {
-		pits = p;
+	public MancalaModel(int initialStones) {
+		pits = new int[14];
+		for (int i = 0; i < 6; i++) {
+			pits[i] = initialStones;
+			pits[i + 7] = initialStones;
+		}
 		listeners = new ArrayList<ChangeListener>();
 	}
 	

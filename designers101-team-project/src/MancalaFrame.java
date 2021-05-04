@@ -7,15 +7,17 @@ import javax.swing.event.*;
 import java.util.*;
 
 public class MancalaFrame extends JFrame implements ChangeListener {
-	private MancalaModel mancalaBoard;
-	private int[] a;
+	private MancalaModel mancalaModel;
+	private GameLogic logic;
+	private int[] pits;
 	
 	private static final int ICON_WIDTH = 600;
 	private static final int ICON_HEIGHT = 400;
 	
-	public MancalaFrame(MancalaModel mancalaBoard) {
-		this.mancalaBoard = mancalaBoard;
-		a = mancalaBoard.getPits();
+	public MancalaFrame(MancalaModel mancalaModel) {
+		this.mancalaModel = mancalaModel;
+		pits = mancalaModel.getPits();
+		logic = new GameLogic(mancalaModel);
 		
 		setTitle("Designers101 Mancala Game!");
 		setSize(ICON_WIDTH, ICON_HEIGHT);
@@ -37,7 +39,7 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 				{
 					public void actionPerformed(ActionEvent event)
 					{
-						mancalaBoard.setStyle(new BoardStyleA());
+						mancalaModel.setStyle(new BoardStyleA());
 					}
 				});
 		
@@ -48,7 +50,7 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 				{
 					public void actionPerformed(ActionEvent event)
 					{
-						mancalaBoard.setStyle(new BoardStyleB());
+						mancalaModel.setStyle(new BoardStyleB());
 					}
 				});
 		
@@ -76,7 +78,7 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 	
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		a = mancalaBoard.getPits();
+		pits = mancalaModel.getPits();
 		repaint();
 	}
 
