@@ -3,26 +3,26 @@ import java.util.ArrayList;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class MancalaBoard {
-	ArrayList<Integer> pits;
+public class MancalaModel {
+	int[] pits;
 	ArrayList<ChangeListener> listeners;
 	
-	public MancalaBoard(ArrayList<Integer> p) {
+	public MancalaModel(int[] p) {
 		pits = p;
 		listeners = new ArrayList<ChangeListener>();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public ArrayList<Integer> getPits() {
-		return (ArrayList<Integer>) (pits.clone());
+	public int[] getPits() {
+		return (int[]) (pits.clone());
 	}
 	
 	public void attach(ChangeListener c) {
 		listeners.add(c);
+		c.stateChanged(new ChangeEvent(this));
 	}
 	
 	public void update(int location, int value) {
-		pits.set(location, new Integer(value));
+		pits[location] = value;
 		for (ChangeListener l: listeners) {
 			l.stateChanged(new ChangeEvent(this));
 		}
