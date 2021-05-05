@@ -4,6 +4,8 @@ public class GameLogic {
 	private int[] currentPits;
 	private int[] previousPits;
 	
+	private String gameState;
+	
 	public GameLogic(MancalaModel model) {
 		this.model = model;
 		currentPits = model.getPits();
