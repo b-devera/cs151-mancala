@@ -42,15 +42,6 @@ public class Pit extends JButton implements ChangeListener {
 		super.paintComponent(g);
 	}
 	
-	protected void paintBorder(Graphics g) {
-		g.setColor(getForeground());
-		
-		if (pitShape.equals(new Rectangle2D.Double(0, 0, 10, 10)))
-			g.fillRect(0, 0, getSize().width - 1, getSize().height - 1);
-		else
-			g.fillRoundRect(0, 0, getSize().width, getSize().height - 1, 30, 30);
-	}
-	
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		MancalaModel m = (MancalaModel) e.getSource();

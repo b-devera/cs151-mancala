@@ -108,11 +108,19 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         mainPanel.add(rowPanel, BorderLayout.CENTER);
         mainPanel.add(playerAStore, BorderLayout.EAST);
         
+        // added bottom panel consisting of the current player turn and an undo button
+        JPanel bottomPanel = new JPanel();
+        JLabel playerTurn = new JLabel("Current Turn: Player 1"); // still needs to make it update to switch between players
+        JButton undoButton = new JButton("Undo");
+        bottomPanel.add(playerTurn);
+        bottomPanel.add(undoButton);
+        
         JFrame frame = new JFrame();
         frame.setTitle("Designers101 Mancala Game!");
         frame.setLayout(new BorderLayout());
 		frame.add(stylePanel, BorderLayout.NORTH);
 		frame.add(mainPanel, BorderLayout.CENTER);
+		frame.add(bottomPanel, BorderLayout.SOUTH);
 		//add(boardArea, BorderLayout.SOUTH);
 		frame.getContentPane().setBackground(style.getBoardColor());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
