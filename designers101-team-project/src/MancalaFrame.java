@@ -39,6 +39,16 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         for (int i = 0; i < 6; i++) {
         	pit = new Pit(i, style.getPitShape(), style.getPitColor(), style.getPitDimension());
         	// add action listener
+        	final int position = i;
+        	pit.addActionListener(new
+        			ActionListener()
+        			{
+        				public void actionPerformed(ActionEvent event)
+        				{
+        					logic.playerMoved(position);
+        				}
+        			});
+        	
         	mancalaModel.attach(pit);
         	secondRow.add(pit);
         }
@@ -51,6 +61,16 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         for (int i = 12; i > 6; i--) {
         	pit = new Pit(i, style.getPitShape(), style.getPitColor(), style.getPitDimension());
         	// add action listener
+        	final int position = i;
+        	pit.addActionListener(new
+        			ActionListener()
+        			{
+        				public void actionPerformed(ActionEvent event)
+        				{
+        					logic.playerMoved(position);
+        				}
+        			});
+        	
         	mancalaModel.attach(pit);
         	firstRow.add(pit);
         }
@@ -76,6 +96,15 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         JPanel bottomPanel = new JPanel();
         JLabel playerTurn = new JLabel("Current Turn: Player 1"); // still needs to make it update to switch between players
         JButton undoButton = new JButton("Undo");
+    	undoButton.addActionListener(new
+    			ActionListener()
+    			{
+    				public void actionPerformed(ActionEvent event)
+    				{
+    					if(logic.canUndo())
+    						logic.undoMove();
+    				}
+    			});
         JLabel undoTries = new JLabel("Undos Left: 3");
         bottomPanel.add(playerTurn);
         bottomPanel.add(undoButton);
