@@ -7,7 +7,9 @@ public class GameLogic {
 	private boolean activeMove;
 	private boolean canUndo;
 	
-	private String gameState;
+	private int currentPlayerTurn;
+	private int amountOfTurns;
+	private int undos;
 	
 	public GameLogic(MancalaModel model) {
 		this.model = model;
@@ -16,6 +18,9 @@ public class GameLogic {
 		turnDone = false;
 		canUndo = false;
 		activeMove = true;
+		currentPlayerTurn = 1;
+		amountOfTurns = 1;
+		undos = 3;
 	}
 	
 	/*
@@ -82,8 +87,10 @@ public class GameLogic {
 	 */
 	public void undoMove()
 	{
-		if(!canUndo)
+		if (undos == 0 && canUndo) {
+			canUndo = false;
 			return;
+		}
 		
 		currentPits = previousPits;
 		for(int i = 0; i < 14; i++)
@@ -91,6 +98,7 @@ public class GameLogic {
 		
 		canUndo = false;
 		activeMove = true;
+		undos--;
 	}
 	
 	/*
@@ -100,5 +108,42 @@ public class GameLogic {
 	public boolean canUndo()
 	{
 		return canUndo;
+	}
+	
+	/**
+	 * Ends the current player's turn
+	 */
+	public void endTurn() {
+		turnDone = true;
+		if (currentPlayerTurn == 1)
+			currentPlayerTurn = 2;
+		else
+			currentPlayerTurn = 1;
+		amountOfTurns++;
+		undos = 3;
+	}
+	
+	/**
+	 * Gets the current player's turn
+	 * @return player 1 or 2
+	 */
+	public int getCurrentPlayerTurn() {
+		return currentPlayerTurn;
+	}
+	
+	/**
+	 * Gets the amount of turns that have passed in the game
+	 * @return the amount of turns that have passed in the game
+	 */
+	public int getAmountOfTurns() {
+		return amountOfTurns;
+	}
+	
+	/**
+	 * Gets the amount of undo tries that the player has
+	 * @return the undo amount
+	 */
+	public int getUndoAmount() {
+		return undos;
 	}
 }

@@ -38,7 +38,6 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         
         for (int i = 0; i < 6; i++) {
         	pit = new Pit(i, style.getPitShape(), style.getPitColor(), style.getPitDimension());
-        	// add action listener
         	final int position = i;
         	pit.addActionListener(new
         			ActionListener()
@@ -60,7 +59,6 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 		
         for (int i = 12; i > 6; i--) {
         	pit = new Pit(i, style.getPitShape(), style.getPitColor(), style.getPitDimension());
-        	// add action listener
         	final int position = i;
         	pit.addActionListener(new
         			ActionListener()
@@ -70,7 +68,7 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         					logic.playerMoved(position);
         				}
         			});
-        	
+        	//pit.setEnabled(false);
         	mancalaModel.attach(pit);
         	firstRow.add(pit);
         }
@@ -94,7 +92,26 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         
         // added bottom panel consisting of the current player turn and an undo button
         JPanel bottomPanel = new JPanel();
-        JLabel playerTurn = new JLabel("Current Turn: Player 1"); // still needs to make it update to switch between players
+        JLabel playerTurn = new JLabel("Current Turn: Player " + logic.getCurrentPlayerTurn()); // still needs to make it update to switch between players
+        
+        JLabel turnAmount = new JLabel("Turn " + logic.getAmountOfTurns());
+        
+        JLabel undoTries = new JLabel("Undos Left: " + logic.getUndoAmount());
+        
+        JButton endTurnButton = new JButton("End Turn");
+        endTurnButton.addActionListener(new 
+        		ActionListener()
+        		{
+		        	public void actionPerformed(ActionEvent event)
+					{
+		        		System.out.println("Pits in turn " + logic.getAmountOfTurns() + ": " + Arrays.toString(pits));
+		        		logic.endTurn();
+		        		playerTurn.setText("Current Turn: Player " + logic.getCurrentPlayerTurn());
+		        		turnAmount.setText("Turn " + logic.getAmountOfTurns());
+		        		undoTries.setText("Undos Left: " + logic.getUndoAmount());
+					}
+        		});
+        
         JButton undoButton = new JButton("Undo");
     	undoButton.addActionListener(new
     			ActionListener()
@@ -103,10 +120,13 @@ public class MancalaFrame extends JFrame implements ChangeListener {
     				{
     					if(logic.canUndo())
     						logic.undoMove();
+    					undoTries.setText("Undos Left: " + logic.getUndoAmount());
     				}
     			});
-        JLabel undoTries = new JLabel("Undos Left: 3");
+        
         bottomPanel.add(playerTurn);
+        bottomPanel.add(endTurnButton);
+        bottomPanel.add(turnAmount);
         bottomPanel.add(undoButton);
         bottomPanel.add(undoTries);
         

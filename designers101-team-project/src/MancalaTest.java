@@ -15,6 +15,5 @@ public class MancalaTest {
 		MancalaFrame mancalaFrame = new MancalaFrame(model, options.getBoardStyleMenu().getSelectedItem().equals("Board Style A") ? 
 				model.setStyle(new BoardStyleA()) : model.setStyle(new BoardStyleB())); // sets the style depending on the option chosen in the combo box
 		model.attach(mancalaFrame);
-		System.out.println("Initial pit values: " + Arrays.toString(model.pits));
 	}
 }

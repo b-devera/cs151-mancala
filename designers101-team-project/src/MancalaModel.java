@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -14,6 +15,7 @@ public class MancalaModel {
 			pits[i + 7] = initialStones;
 		}
 		listeners = new ArrayList<ChangeListener>();
+		System.out.println("Initial pit values: " + Arrays.toString(pits));
 	}
 	
 	public int[] getPits() {
