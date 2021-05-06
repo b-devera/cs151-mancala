@@ -35,9 +35,10 @@ public class MancalaModel {
 	/**
 	 * Sets the game board up according to the given style.
 	 * @param someStyle a Board Style to give the game board
+	 * @return 
 	 */
-	public void setStyle(BoardStyle someStyle)
+	public BoardStyle setStyle(BoardStyle someStyle)
 	{
-		BoardStyle styleToUse = someStyle;
+		return someStyle;
 	}
 }
