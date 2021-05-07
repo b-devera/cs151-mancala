@@ -5,19 +5,24 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * OptionDialog is displayed to determine how many stones should be in each pit and which board style to use
+ * @author Berlun Devera, Sweta Pradhan, Brandon Russell
+ *
+ */
 public class OptionDialog {
 	private JComboBox<String[]> boardStyleMenu;
 	private int initialStone;
 	
 	/**
-	 * Shows the inital setup dialog where the player can choose board styles and number of stones in each pit
+	 * Shows the inital setup dialog where the player can choose board styles and number of stones in each pit.
 	 */
 	public void showInitialDialog() {
 		JPanel initialScreen = new JPanel(new BorderLayout());
 		
 		JLabel boardStyleLabel = new JLabel("Select board style: ");
 		
-		String[] boardStyles = {"Board Style A", "Board Style B"};
+		String[] boardStyles = {"Concrete", "Cherry Blossom"};
         boardStyleMenu = new JComboBox(boardStyles);
         
         JLabel initialStoneLabel = new JLabel("Select the number of stones per pit: ");
@@ -31,7 +36,7 @@ public class OptionDialog {
 	}
 	
 	/**
-	 * Gets the combo box for the different board styles
+	 * Gets the combo box for the different board styles.
 	 * @return boardStyleMenu the board style menu
 	 */
 	public JComboBox<String[]> getBoardStyleMenu() {
@@ -39,7 +44,7 @@ public class OptionDialog {
 	}
 	
 	/**
-	 * Gets the stone number selected from the option dialog
+	 * Gets the stone number selected from the option dialog.
 	 * @return initialStone the selected stone number
 	 */
 	public int getInitialStones() {

@@ -1,4 +1,9 @@
 
+/**
+ * GameLogic is the Controller part of the MVC pattern.
+ * @author Berlun Devera, Brandon Russell, Sweta Pradhan
+ *
+ */
 public class GameLogic {
 	private final MancalaModel model;
 	private int[] currentPits;
@@ -13,6 +18,10 @@ public class GameLogic {
 	private int amountOfTurns;
 	private int undos;
 	
+	/**
+	 * Constructor for the GameLogic class
+	 * @param model the mancala model to attach the game logic to
+	 */
 	public GameLogic(MancalaModel model) {
 		this.model = model;
 		currentPits = model.getPits();

@@ -1,12 +1,16 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.util.*;
 
-public class MancalaFrame extends JFrame implements ChangeListener {
+/**
+ * BoardFrame is the View part of the MVC Pattern
+ * @author Berlun Devera, Brandon Russell, Sweta Pradhan
+ *
+ */
+public class BoardFrame extends JFrame implements ChangeListener {
 	private MancalaModel mancalaModel;
 	private GameLogic logic;
 	private int[] pits;
@@ -16,7 +20,7 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 	 * @param mancalaModel the model used to attach to the frame
 	 * @param style the BoardStyle chosen
 	 */
-	public MancalaFrame(MancalaModel mancalaModel, BoardStyle style) {
+	public BoardFrame(MancalaModel mancalaModel, BoardStyle style) {
 		this.mancalaModel = mancalaModel;
 		pits = mancalaModel.getPits();
 		logic = new GameLogic(mancalaModel);
@@ -40,10 +44,10 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 
         JPanel playerBStore = new JPanel();
         
-        Pit pit;
+        PitButton pit;
         
         for (int i = 0; i < 6; i++) {
-        	pit = new Pit(i, style.getPitShape(), style.getPitColor(), style.getPitDimension());
+        	pit = new PitButton(i, style.getPitShape(), style.getPitColor(), style.getPitDimension());
         	final int position = i;
         	pit.addActionListener(new
         			ActionListener()
@@ -65,13 +69,13 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         	secondRow.add(pit);
         }
         
-        pit = new Pit(6, style.getPitShape(), style.getPitColor(), style.getStoreDimension());
+        pit = new PitButton(6, style.getPitShape(), style.getPitColor(), style.getStoreDimension());
         pit.setEnabled(false);
         playerAStore.add(pit);
         mancalaModel.attach(pit);
 		
         for (int i = 12; i > 6; i--) {
-        	pit = new Pit(i, style.getPitShape(), style.getPitColor(), style.getPitDimension());
+        	pit = new PitButton(i, style.getPitShape(), style.getPitColor(), style.getPitDimension());
         	final int position = i;
         	pit.addActionListener(new
         			ActionListener()
@@ -93,7 +97,7 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         	firstRow.add(pit);
         }
         
-        pit = new Pit(13, style.getPitShape(), style.getPitColor(), style.getStoreDimension());
+        pit = new PitButton(13, style.getPitShape(), style.getPitColor(), style.getStoreDimension());
         pit.setEnabled(false);
         playerBStore.add(pit);
         mancalaModel.attach(pit);

@@ -8,13 +8,25 @@ import javax.swing.JButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class Pit extends JButton implements ChangeListener {
+/**
+ * PitButton is the button that can be pressed to play Mancala
+ * @author Berlun Devera, Brandon Russell, Sweta Pradhan
+ *
+ */
+public class PitButton extends JButton implements ChangeListener {
 	private int pitPosition;
 	private Color pitColor;
 	private Shape pitShape;
 	
 	
-	public Pit(int pitPosition, Shape pitShape, Color pitColor, Dimension d) {
+	/**
+	 * Constructor class for PitButton
+	 * @param pitPosition the position of the pit
+	 * @param pitShape the shape of the pit
+	 * @param pitColor the color of the pit
+	 * @param d the dimensions of the pit
+	 */
+	public PitButton(int pitPosition, Shape pitShape, Color pitColor, Dimension d) {
 		this.pitPosition = pitPosition;
 		this.pitColor = pitColor;
 		this.pitShape = pitShape;
@@ -22,10 +34,17 @@ public class Pit extends JButton implements ChangeListener {
 		setContentAreaFilled(false);
 	}
 	
+	/**
+	 * Gets the pit position.
+	 * @return the pit position
+	 */
 	public int getPosition() {
 		return pitPosition;
 	}
 	
+	/**
+	 * Paints the pit button with the specified dimensions and color.
+	 */
 	protected void paintComponent(Graphics g) {
 		setBackground(pitColor);
 		
@@ -42,6 +61,9 @@ public class Pit extends JButton implements ChangeListener {
 		super.paintComponent(g);
 	}
 	
+	/**
+	 * Changes the text of the pit when the pit button is pressed.
+	 */
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		MancalaModel m = (MancalaModel) e.getSource();
