@@ -6,7 +6,9 @@ public class GameLogic {
 	private boolean turnDone; //we can use this boolean to track when a turn has finished
 	private boolean activeMove;
 	private boolean canUndo;
-	
+	private boolean playerMoved;
+	private static final int PLAYER_1 = 1;
+	private static final int PLAYER_2 = 2;
 	private int currentPlayerTurn;
 	private int amountOfTurns;
 	private int undos;
@@ -18,7 +20,8 @@ public class GameLogic {
 		turnDone = false;
 		canUndo = false;
 		activeMove = true;
-		currentPlayerTurn = 1;
+		playerMoved = false;
+		currentPlayerTurn = PLAYER_1;
 		amountOfTurns = 1;
 		undos = 3;
 	}
@@ -43,14 +46,14 @@ public class GameLogic {
 		return done;
 	}
 	
-	/*
+	/**
 	 * Implements a player move by "moving" the stones when a player chooses a pit
 	 * and updates the mancala with the current state after moving.
 	 * @param pit the pit position chosen by the player
 	 */
-	public void playerMoved(int pit)
+	public void playerMove(int pit)
 	{
-		if(!activeMove) //will be used to check if play is in an active state; i.e. a player has not moved yet or a player undid a move
+		if(!activeMove || !validMove(pit)) //will be used to check if play is in an active state; i.e. a player has not moved yet or a player undid a move
 			return;
 		
 		previousPits = currentPits.clone(); //stores the mancala state before moving the stones
@@ -79,11 +82,13 @@ public class GameLogic {
 		}
 		
 		activeMove = false;
+		playerMoved = true;
 		canUndo = true;
 	}
 	
-	/*
-	 * Undoes a player move if available; returning the mancala to the previous state
+	/**
+	 * Undoes a player move if available; returning the mancala 
+	 * to the previous state
 	 */
 	public void undoMove()
 	{
@@ -97,11 +102,12 @@ public class GameLogic {
 			model.update(i, currentPits[i]);
 		
 		canUndo = false;
+		playerMoved = false;
 		activeMove = true;
 		undos--;
 	}
 	
-	/*
+	/**
 	 * Reports if the player can currently use the undo method
 	 * @return true if the current player can perform an undo
 	 */
@@ -115,12 +121,13 @@ public class GameLogic {
 	 */
 	public void endTurn() {
 		turnDone = true;
-		if (currentPlayerTurn == 1)
-			currentPlayerTurn = 2;
+		if (currentPlayerTurn == PLAYER_1)
+			currentPlayerTurn = PLAYER_2;
 		else
-			currentPlayerTurn = 1;
+			currentPlayerTurn = PLAYER_1;
 		amountOfTurns++;
 		undos = 3;
+		playerMoved = false;
 		activeMove = true;
 	}
 	
@@ -146,5 +153,28 @@ public class GameLogic {
 	 */
 	public int getUndoAmount() {
 		return undos;
+	}
+	
+	/**
+	 * Gets if a player has made a move or not
+	 * @return true if the player has made a move
+	 */
+	public boolean getPlayerMoved()
+	{
+		return playerMoved;
+	}
+	
+	/**
+	 * Checks if a selected player's requested move is
+	 * @return true if the selected move is valid
+	 */
+	private boolean validMove(int pit)
+	{
+		if(currentPits[pit] != 0 && pit < 6 && currentPlayerTurn == PLAYER_1)
+			return true;
+		else if(currentPits[pit] != 0 && pit > 6 && currentPlayerTurn == PLAYER_2)
+			return true;
+		else
+			return false;
 	}
 }

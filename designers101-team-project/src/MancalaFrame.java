@@ -21,6 +21,12 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 		pits = mancalaModel.getPits();
 		logic = new GameLogic(mancalaModel);
 		
+		JButton endTurnButton = new JButton("End Turn");;
+		endTurnButton.setEnabled(false); //disabled until first move made
+		
+		JButton undoButton = new JButton("Undo");
+		undoButton.setEnabled(false);//disabled until first move made
+		
 		TitlePanel titlePanel = new TitlePanel();
 		titlePanel.setBackground(Color.GRAY);
 		
@@ -44,7 +50,14 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         			{
         				public void actionPerformed(ActionEvent event)
         				{
-        					logic.playerMoved(position);
+        					logic.playerMove(position);
+        					if(logic.getPlayerMoved() && logic.getUndoAmount() != 0)
+        					{
+        						undoButton.setEnabled(true);//activates undo button after player has made a move
+        						endTurnButton.setEnabled(true); //activates end turn button after player has made a move
+        					}
+        					else if(logic.getPlayerMoved())
+        						endTurnButton.setEnabled(true); //activates end turn button after player has made a move
         				}
         			});
         	
@@ -65,7 +78,14 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         			{
         				public void actionPerformed(ActionEvent event)
         				{
-        					logic.playerMoved(position);
+        					logic.playerMove(position);
+        					if(logic.getPlayerMoved() && logic.getUndoAmount() != 0)
+        					{
+        						undoButton.setEnabled(true);//activates undo button after player has made a move
+        						endTurnButton.setEnabled(true); //activates end turn button after player has made a move
+        					}
+        					else if(logic.getPlayerMoved())
+        						endTurnButton.setEnabled(true); //activates end turn button after player has made a move
         				}
         			});
         	//pit.setEnabled(false);
@@ -98,7 +118,6 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         
         JLabel undoTries = new JLabel("Undos Left: " + logic.getUndoAmount());
         
-        JButton endTurnButton = new JButton("End Turn");
         endTurnButton.addActionListener(new 
         		ActionListener()
         		{
@@ -109,10 +128,12 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 		        		playerTurn.setText("Current Turn: Player " + logic.getCurrentPlayerTurn());
 		        		turnAmount.setText("Turn " + logic.getAmountOfTurns());
 		        		undoTries.setText("Undos Left: " + logic.getUndoAmount());
+		        		undoButton.setEnabled(false); //disables undo button, if enabled, until next player moves
+		        		endTurnButton.setEnabled(false); //disables at end of turn
 					}
         		});
         
-        JButton undoButton = new JButton("Undo");
+        
     	undoButton.addActionListener(new
     			ActionListener()
     			{
@@ -121,6 +142,8 @@ public class MancalaFrame extends JFrame implements ChangeListener {
     					if(logic.canUndo())
     						logic.undoMove();
     					undoTries.setText("Undos Left: " + logic.getUndoAmount());
+    					undoButton.setEnabled(false);//disables undo button until next move made
+    					endTurnButton.setEnabled(false); //disables end turn button if player undoes their move
     				}
     			});
         
