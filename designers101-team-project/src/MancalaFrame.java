@@ -104,11 +104,27 @@ public class MancalaFrame extends JFrame implements ChangeListener {
         rowPanel.add(secondRow);
 
         JPanel mainPanel = new JPanel();
+        
+        JPanel pitPanelB = new JPanel(new GridLayout(1, 6));
+        String[] pitNamesB = {"B", "B6", "B5", "B4", "B3", "B2", "B1"};
+        for (int i = 0; i < pitNamesB.length; i++) {
+        	JLabel l = new JLabel(pitNamesB[i]);
+        	pitPanelB.add(l, 1, i);
+        }
+        
+        JPanel pitPanelA = new JPanel(new GridLayout(1, 6));
+        String[] pitNamesA = {"A6", "A5", "A4", "A3", "A2", "A1", "A"};
+        for (int i = 0; i < pitNamesA.length; i++) {
+        	JLabel l = new JLabel(pitNamesA[i]);
+        	pitPanelA.add(l, 1, i);
+        }
+        
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(titlePanel);
+        mainPanel.add(pitPanelB, BorderLayout.NORTH);
         mainPanel.add(playerBStore, BorderLayout.WEST);
         mainPanel.add(rowPanel, BorderLayout.CENTER);
         mainPanel.add(playerAStore, BorderLayout.EAST);
+        mainPanel.add(pitPanelA, BorderLayout.SOUTH);
         
         // added bottom panel consisting of the current player turn and an undo button
         JPanel bottomPanel = new JPanel();
