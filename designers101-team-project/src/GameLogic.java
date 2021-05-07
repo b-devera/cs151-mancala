@@ -121,6 +121,7 @@ public class GameLogic {
 			currentPlayerTurn = 1;
 		amountOfTurns++;
 		undos = 3;
+		activeMove = true;
 	}
 	
 	/**
