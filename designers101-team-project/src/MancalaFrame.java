@@ -105,17 +105,19 @@ public class MancalaFrame extends JFrame implements ChangeListener {
 
         JPanel mainPanel = new JPanel();
         
-        JPanel pitPanelB = new JPanel(new GridLayout(1, 6));
-        String[] pitNamesB = {"B", "B6", "B5", "B4", "B3", "B2", "B1"};
+        JPanel pitPanelB = new JPanel(new GridLayout(1, 8));
+        String[] pitNamesB = {"B", "B6", "B5", "B4", "B3", "B2", "B1", " "};
         for (int i = 0; i < pitNamesB.length; i++) {
         	JLabel l = new JLabel(pitNamesB[i]);
+        	l.setHorizontalAlignment(l.CENTER);
         	pitPanelB.add(l, 1, i);
         }
         
-        JPanel pitPanelA = new JPanel(new GridLayout(1, 6));
-        String[] pitNamesA = {"A6", "A5", "A4", "A3", "A2", "A1", "A"};
+        JPanel pitPanelA = new JPanel(new GridLayout(1, 8));
+        String[] pitNamesA = {" ", "A1", "A2", "A3", "A4", "A5", "A6", "A"};
         for (int i = 0; i < pitNamesA.length; i++) {
         	JLabel l = new JLabel(pitNamesA[i]);
+        	l.setHorizontalAlignment(l.CENTER);
         	pitPanelA.add(l, 1, i);
         }
         

@@ -10,7 +10,7 @@ import java.awt.geom.RoundRectangle2D;
 public class BoardStyleB implements BoardStyle
 {
 	private static final Color BOARD_COLOR = Color.CYAN;
-	private static final Color PIT_COLOR = Color.GRAY;
+	private static final Color PIT_COLOR = Color.LIGHT_GRAY;
 	private static final Font BOARD_FONT = new Font(Font.SERIF, Font.BOLD, 12);
 	
 	/**
