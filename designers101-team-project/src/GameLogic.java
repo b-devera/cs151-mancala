@@ -74,14 +74,21 @@ public class GameLogic {
 		
 		while(stonePickupCount > 0)
 		{
-			currentPits[nextPit] += 1;
+			if(nextPit != 13 && currentPlayerTurn == PLAYER_1 ) //ensures stones are not added to Player 2's store when it's Player 1's turn
+			{
+				 stonePickupCount--;
+				 currentPits[nextPit] += 1;
+			}
+			else if(nextPit != 6 && currentPlayerTurn == PLAYER_2)//ensures stones are not added to Player 1's store when it's Player 2's turn
+			{
+				stonePickupCount--;
+				currentPits[nextPit] += 1;
+			}
 			
 			if(nextPit == 13)
 				nextPit = 0;
 			else
 				nextPit++;
-			
-			stonePickupCount--;
 		}
 		
 		
